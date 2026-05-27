@@ -273,7 +273,7 @@ async function callClaude(prompt){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       contents:[{parts:[{text:prompt}]}],
-      generationConfig:{temperature:0.7,maxOutputTokens:1500}
+      generationConfig:{temperature:0.7,maxOutputTokens:3000}
     })
   });
   const d = await r.json();
@@ -749,18 +749,18 @@ ${formData.rawMetrics||'無'}
 
 請輸出此 JSON（繁體中文，行銷口吻，專業有說服力）：
 {
-  "headline": "品牌+核心做法+數據亮點，20~40字",
-  "subtitle": "一句補充說明，15~25字",
-  "touchpoint_title": "接觸點小標，8~12字",
-  "touchpoint_body": "接觸點說明，50~80字",
-  "interaction_title": "互動與體驗小標，8~12字",
-  "interaction_body": "互動與體驗說明，50~80字",
-  "incentive_title": "強化完成誘因小標，8~12字",
-  "incentive_body": "強化完成誘因說明，50~80字",
-  "outcome_title": "目標與成效小標，8~12字",
-  "outcome_body": "目標與成效說明，50~80字",
+  "headline": "品牌+核心做法+數據亮點，20~35字",
+  "subtitle": "一句補充說明，15~20字",
+  "touchpoint_title": "接觸點小標，6~10字",
+  "touchpoint_body": "接觸點說明，40~60字",
+  "interaction_title": "互動與體驗小標，6~10字",
+  "interaction_body": "互動與體驗說明，40~60字",
+  "incentive_title": "強化完成誘因小標，6~10字",
+  "incentive_body": "強化完成誘因說明，40~60字",
+  "outcome_title": "目標與成效小標，6~10字",
+  "outcome_body": "目標與成效說明，40~60字",
   "metrics": [{"value":"數值如 90k+","label":"指標名稱"}],
-  "summary": "整體成果總結，60~90字",
+  "summary": "整體成果總結，50~70字",
   "suggested_goals": ["從以下選擇最相關的3~4個：提升用戶互動、增加用戶活躍度、增加綁定用戶、增加 LINE 用戶、增加線下導購、舊客喚回、O2O 導流、搜集用戶輪廓、增加線上互動、提高會員活躍度、沉浸式互動體驗"]
 }`;
     try{
