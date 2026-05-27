@@ -279,11 +279,11 @@ async function callClaude(prompt){
   const d = await r.json();
   if(d.error) throw new Error(d.error.message);
   const txt = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
-  // Strip markdown fences first
-  const stripped = txt.replace(/^```json\s*/,'').replace(/```\s*$/,'').trim();
-  const jsonMatch = stripped.match(/\{[\s\S]*\}/);
-  if(!jsonMatch) throw new Error('No JSON in response: ' + txt.substring(0,100));
-  return jsonMatch[0].trim();
+  // Find first { and last } to extract JSON regardless of surrounding text
+  const first = txt.indexOf('{');
+  const last = txt.lastIndexOf('}');
+  if(first === -1 || last === -1) throw new Error('No JSON in response: ' + txt.substring(0,150));
+  return txt.substring(first, last+1);
 }
 
 function fileToDataURL(file){
