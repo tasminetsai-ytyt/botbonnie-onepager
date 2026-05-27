@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BotBonnie One-Pager Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:'Open Sans','Noto Sans TC',sans-serif;background:#f4f3f8;color:#1a1830;min-height:100vh}
+#root{min-height:100vh}
+
+/* ── PASSWORD GATE ── */
+.gate-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#f0eeff 0%,#f8f7ff 50%,#eef3ff 100%)}
+.gate-card{background:#fff;border:1.5px solid #e2dff5;border-radius:18px;padding:44px 40px 36px;width:360px;box-shadow:0 8px 40px rgba(91,79,255,.09);text-align:center}
+.gate-logo{width:52px;height:52px;background:linear-gradient(135deg,#296AFF,#0321AA);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Open Sans',sans-serif;font-size:24px;font-weight:700;color:#fff;margin:0 auto 18px}
+.gate-title{font-family:'Open Sans',sans-serif;font-size:20px;font-weight:700;color:#1a1830;margin-bottom:5px}
+.gate-sub{font-size:13px;color:#9490b8;margin-bottom:28px;line-height:1.5}
+.gate-field{position:relative;margin-bottom:14px}
+.gate-field input{width:100%;background:#faf9ff;border:1.5px solid #e2dff5;border-radius:10px;color:#1a1830;font-family:'Open Sans','Noto Sans TC',sans-serif;font-size:14px;padding:12px 42px 12px 14px;outline:none;transition:border-color .15s;text-align:center;letter-spacing:2px}
+.gate-field input:focus{border-color:#296AFF;background:#fff}
+.gate-field input.err-shake{border-color:#f05454;animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.gate-toggle{position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#b0acc8;font-size:15px;padding:4px}
+.gate-btn{width:100%;padding:12px;background:linear-gradient(135deg,#296AFF,#0321AA);border:none;border-radius:10px;color:#fff;font-family:'Open Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s,transform .1s;margin-top:4px}
+.gate-btn:hover{opacity:.9}
+.gate-btn:active{transform:scale(.98)}
+.gate-err{font-size:12px;color:#f05454;margin-top:8px;min-height:18px}
+.gate-footer{font-size:11px;color:#c4c0e0;margin-top:20px}
+
+/* ── LAYOUT ── */
+.app{display:grid;grid-template-columns:460px 1fr;min-height:100vh}
+
+/* ── LEFT PANEL ── */
+.left{background:#fff;border-right:1.5px solid #e8e5f5;display:flex;flex-direction:column;height:100vh;position:sticky;top:0;overflow:hidden}
+.left-header{padding:22px 24px 16px;border-bottom:1px solid #e8eeff;flex-shrink:0}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.logo-box{width:34px;height:34px;background:linear-gradient(135deg,#296AFF,#0321AA);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Open Sans',sans-serif;font-size:16px;font-weight:700;color:#fff}
+.logo-name{font-family:'Open Sans',sans-serif;font-size:17px;font-weight:700;color:#1a1830;letter-spacing:-0.3px}
+.logo-tag{font-size:10px;background:#e8eeff;color:#296AFF;border-radius:20px;padding:2px 8px;font-weight:600}
+.left-sub{font-size:12px;color:#9490b8;line-height:1.5}
+
+.steps-bar{display:flex;gap:0;padding:0 24px;background:#faf9ff;border-bottom:1px solid #e8eeff;flex-shrink:0}
+.step-tab{flex:1;padding:10px 4px;font-size:11px;font-weight:600;color:#b0acc8;border-bottom:2.5px solid transparent;cursor:pointer;text-align:center;transition:all .2s;letter-spacing:.3px}
+.step-tab.active{color:#296AFF;border-bottom-color:#296AFF}
+.step-tab.done{color:#296AFF}
+
+.left-body{flex:1;overflow-y:auto;padding:20px 24px 24px}
+
+/* ── FORM ELEMENTS ── */
+.field-group{margin-bottom:14px}
+.field-label{font-size:12px;font-weight:600;color:#5a567a;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.field-label .req{color:#f05454;font-size:10px}
+.field-label .hint{font-size:10px;color:#b0acc8;font-weight:400}
+input[type=text],textarea,select{width:100%;background:#faf9ff;border:1.5px solid #e2dff5;border-radius:9px;color:#1a1830;font-family:'Open Sans','Noto Sans TC',sans-serif;font-size:13.5px;padding:9px 12px;outline:none;transition:border-color .15s}
+input[type=text]:focus,textarea:focus,select:focus{border-color:#296AFF;background:#fff}
+textarea{resize:vertical;line-height:1.65;min-height:80px}
+select{cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+.section-head{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#c4c0e0;margin:18px 0 10px}
+
+/* ── BADGE TOGGLES ── */
+.badge-group{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.btog{font-size:12px;padding:5px 11px;border-radius:20px;border:1.5px solid #e2dff5;background:#faf9ff;color:#7a78a0;cursor:pointer;transition:all .15s;font-family:'Open Sans','Noto Sans TC',sans-serif;font-weight:500}
+.btog:hover{border-color:#5E8FFF;color:#296AFF}
+.btog.on{background:#e8eeff;border-color:#296AFF;color:#296AFF;font-weight:600}
+
+/* kit groups */
+.kit-group{margin-bottom:10px}
+.kit-group-label{font-size:11px;font-weight:600;color:#9490b8;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.kit-group-label::after{content:'';flex:1;height:1px;background:#e8eeff}
+.custom-kit-input{margin-top:8px}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:5px;min-height:30px;border:1.5px solid #e2dff5;border-radius:9px;padding:6px 8px;background:#faf9ff;cursor:text;transition:border-color .15s}
+.chip-wrap:focus-within{border-color:#296AFF;background:#fff}
+.chip{display:inline-flex;align-items:center;gap:4px;background:#e8eeff;color:#296AFF;border-radius:14px;padding:3px 9px;font-size:12px;font-weight:600}
+.chip-x{cursor:pointer;font-size:11px;color:#a89cf7;line-height:1}
+.chip-wrap input{border:none;background:transparent;outline:none;font-size:13px;font-family:'Open Sans','Noto Sans TC',sans-serif;color:#1a1830;min-width:120px;padding:2px 4px}
+
+/* upload */
+.upload-zone{border:2px dashed #d8d4f0;border-radius:11px;padding:16px;text-align:center;cursor:pointer;transition:all .15s;background:#fdfcff}
+.upload-zone:hover{border-color:#296AFF;background:#f5f3ff}
+.upload-zone.has-files{border-color:#5E8FFF;background:#f5f3ff}
+.upload-label{font-size:12px;color:#9490b8;line-height:1.6}
+.upload-thumb-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;justify-content:flex-start}
+.upload-thumb{position:relative;width:72px;height:72px;border-radius:10px;overflow:hidden;border:1.5px solid #e2dff5}
+.upload-thumb img{width:100%;height:100%;object-fit:cover}
+.upload-thumb .rm{position:absolute;top:3px;right:3px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:18px;height:18px;font-size:10px;cursor:pointer;color:#5a567a;display:flex;align-items:center;justify-content:center;line-height:1}
+.logo-preview{width:80px;height:50px;object-fit:contain;border-radius:6px;border:1.5px solid #e2dff5;background:#fff;padding:4px}
+
+/* radio like */
+.radio-row{display:flex;gap:8px;flex-wrap:wrap}
+.radio-opt{display:flex;align-items:center;gap:6px;padding:7px 12px;border:1.5px solid #e2dff5;border-radius:9px;cursor:pointer;font-size:13px;color:#5a567a;background:#faf9ff;transition:all .15s;font-weight:500}
+.radio-opt:hover{border-color:#5E8FFF}
+.radio-opt.sel{border-color:#296AFF;background:#e8eeff;color:#296AFF;font-weight:600}
+.radio-opt input{display:none}
+
+/* nav buttons */
+.nav-row{display:flex;gap:8px;margin-top:18px}
+.btn-back{flex:0 0 auto;padding:10px 16px;border:1.5px solid #e2dff5;border-radius:9px;background:#fff;color:#9490b8;font-size:13px;font-weight:600;cursor:pointer;font-family:'Open Sans','Noto Sans TC',sans-serif;transition:all .15s}
+.btn-back:hover{border-color:#5E8FFF;color:#296AFF}
+.btn-next{flex:1;padding:11px;background:linear-gradient(135deg,#296AFF,#0321AA);border:none;border-radius:9px;color:#fff;font-family:'Open Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:opacity .15s,transform .1s}
+.btn-next:hover{opacity:.9}
+.btn-next:active{transform:scale(.98)}
+.btn-next:disabled{opacity:.45;cursor:not-allowed}
+.btn-secondary{flex:1;padding:10px;border:1.5px solid #296AFF;border-radius:9px;background:#fff;color:#296AFF;font-family:'Open Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
+.btn-secondary:hover{background:#e8eeff}
+
+/* spinner */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:rotate .7s linear infinite;vertical-align:middle;margin-right:7px}
+@keyframes rotate{to{transform:rotate(360deg)}}
+
+/* error */
+.err{background:#fff2f2;border:1.5px solid #fca5a5;border-radius:8px;padding:10px 14px;color:#dc2626;font-size:13px;margin-top:12px;line-height:1.55}
+
+/* progress indicator */
+.progress{display:flex;gap:4px;padding:0 24px 14px;flex-shrink:0}
+.prog-dot{flex:1;height:3px;border-radius:2px;background:#e2dff5;transition:background .3s}
+.prog-dot.done{background:#296AFF}
+.prog-dot.active{background:#296AFF}
+
+/* ── RIGHT PANEL ── */
+.right{padding:32px 36px;overflow-y:auto;background:#f4f3f8}
+
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center;gap:14px}
+.empty-icon{font-size:52px;opacity:.18;color:#296AFF}
+.empty-state h2{font-size:18px;color:#6e6a90;font-weight:600}
+.empty-state p{font-size:13px;color:#b0acc8;line-height:1.65;max-width:300px}
+
+/* ── PREVIEW ── */
+.preview-wrap{animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.preview-actions{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.pa-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Open Sans','Noto Sans TC',sans-serif;border:1.5px solid #e2dff5;background:#fff;color:#5a567a;transition:all .15s}
+.pa-btn:hover{border-color:#296AFF;color:#296AFF}
+.pa-btn.primary{background:linear-gradient(135deg,#296AFF,#0321AA);color:#fff;border:none}
+.pa-btn.primary:hover{opacity:.9}
+.pa-btn.success{background:#ecfdf5;color:#059669;border-color:#6ee7b7}
+
+/* ── SLIDE CANVAS ── */
+.slide-canvas{background:#fff;border-radius:14px;border:1.5px solid #e2dff5;overflow:hidden;box-shadow:0 4px 24px rgba(91,79,255,.07)}
+
+/* top strip */
+.slide-top{background:#1A234E;padding:18px 28px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.slide-brand{display:flex;align-items:center;gap:12px}
+.slide-logo-box{width:56px;height:36px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.slide-logo-box img{max-width:100%;max-height:100%;object-fit:contain}
+.slide-logo-empty{width:56px;height:36px;border-radius:7px;border:1.5px dashed rgba(255,255,255,.35);flex-shrink:0}
+.slide-goals{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
+.slide-goal-chip{font-size:11px;padding:3px 10px;border-radius:4px;font-weight:700;letter-spacing:.2px}
+.gc-blue{background:#dbeafe;color:#1d4ed8}
+.gc-green{background:#dcfce7;color:#15803d}
+.gc-amber{background:#fef9c3;color:#a16207}
+.gc-teal{background:#ccfbf1;color:#0f766e}
+.gc-pink{background:#fce7f3;color:#9d174d}
+.gc-purple{background:#e8eeff;color:#296AFF}
+
+.slide-titles{padding:22px 28px 18px;border-bottom:1px solid #f0eeff}
+.slide-headline{font-size:19px;font-weight:900;color:#1a1830;line-height:1.3;letter-spacing:-.3px;margin-bottom:6px}
+.slide-headline[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
+.slide-headline[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+.slide-subtitle{font-size:13px;color:#8784a8;line-height:1.6}
+.slide-subtitle[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
+.slide-subtitle[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+
+/* four columns */
+.slide-cols{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #f0eeff}
+.slide-col{padding:16px 18px;border-right:1px solid #f0eeff;position:relative}
+.slide-col:last-child{border-right:none}
+.col-num{font-size:9px;background:#e8eeff;color:#296AFF;border-radius:3px;padding:1px 5px;font-weight:700;margin-bottom:7px;display:inline-block}
+.col-head{font-size:9.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:#b0acc8;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid #f0eeff}
+.col-title{font-size:12.5px;font-weight:700;color:#2d2b4e;margin-bottom:6px;line-height:1.35}
+.col-title[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
+.col-title[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+.col-body{font-size:11.5px;color:#6e6a90;line-height:1.7}
+.col-body[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
+.col-body[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+.edit-hint{font-size:10px;color:#d0cce8;margin-top:6px;font-style:italic;display:none}
+.slide-col:hover .edit-hint{display:block}
+
+/* screenshots area */
+.slide-screens{padding:16px 28px;display:flex;gap:10px;background:#faf9ff;border-bottom:1px solid #f0eeff;flex-wrap:wrap}
+.screen-img{border-radius:12px;overflow:hidden;border:1.5px solid #e2dff5;height:130px;flex:1;min-width:100px;max-width:200px}
+.screen-img img{width:100%;height:100%;object-fit:cover}
+.screen-placeholder{height:130px;flex:1;min-width:100px;max-width:200px;border-radius:12px;border:2px dashed #e2dff5;background:#f4f3f8;display:flex;align-items:center;justify-content:center;font-size:11px;color:#c4c0e0}
+
+/* metrics */
+.slide-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;padding:16px 28px;border-bottom:1px solid #f0eeff}
+.metric-card{background:#faf9ff;border:1.5px solid #e8eeff;border-radius:10px;padding:14px 12px;text-align:center}
+.metric-val{font-family:'Open Sans',sans-serif;font-size:26px;font-weight:700;color:#296AFF;line-height:1;margin-bottom:5px}
+.metric-val[contenteditable]{outline:none;border-radius:4px}
+.metric-val[contenteditable]:focus{background:#f5f3ff}
+.metric-lbl{font-size:11px;color:#9490b8;line-height:1.4}
+.metric-lbl[contenteditable]{outline:none;border-radius:4px}
+.metric-lbl[contenteditable]:focus{background:#f5f3ff}
+.metric-add{background:transparent;border:2px dashed #d8d4f0;border-radius:10px;padding:14px 12px;text-align:center;cursor:pointer;font-size:11px;color:#b0acc8;transition:all .15s}
+.metric-add:hover{border-color:#296AFF;color:#296AFF}
+
+/* summary */
+.slide-summary{padding:16px 28px}
+.sum-label{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#296AFF;margin-bottom:7px}
+.sum-text{font-size:12px;color:#6e6a90;line-height:1.7}
+.sum-text[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
+.sum-text[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+
+/* specs footer */
+.slide-specs{padding:12px 28px;background:#faf9ff;border-top:1px solid #f0eeff;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.spec-chip{font-size:11px;background:#fff;border:1px solid #e2dff5;border-radius:6px;padding:3px 9px;color:#9490b8}
+.spec-chip strong{color:#5a567a;font-weight:600}
+.appier-logo{margin-left:auto;font-size:10px;color:#c4c0e0;font-weight:600;font-family:'Open Sans',sans-serif}
+
+/* goal suggestion */
+.goal-suggestion-wrap{background:#fff;border:1.5px solid #e8eeff;border-radius:10px;padding:14px 16px;margin-top:16px}
+.gs-label{font-size:11px;font-weight:600;color:#296AFF;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.gs-loading{font-size:12px;color:#b0acc8;font-style:italic}
+
+/* ai loading overlay */
+.ai-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;gap:12px;color:#9490b8}
+.ai-loading .big-spin{width:36px;height:36px;border:3px solid #e8eeff;border-top-color:#296AFF;border-radius:50%;animation:rotate .8s linear infinite}
+.ai-loading p{font-size:13px;line-height:1.6;text-align:center;max-width:240px}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#f4f3f8}
+::-webkit-scrollbar-thumb{background:#d4d0ea;border-radius:3px}
+
+/* editable glow hint */
+[contenteditable]:hover:not(:focus){background:#f8f7ff;border-radius:4px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script type="text/babel">
+const { useState, useRef, useCallback, useEffect } = React;
+
+/* ─── CONSTANTS ─── */
+const GOAL_OPTS = [
+  {label:'提升用戶互動',color:'gc-blue'},
+  {label:'增加用戶活躍度',color:'gc-green'},
+  {label:'增加綁定用戶',color:'gc-amber'},
+  {label:'增加 LINE 用戶',color:'gc-teal'},
+  {label:'增加線下導購',color:'gc-pink'},
+  {label:'舊客喚回',color:'gc-amber'},
+  {label:'O2O 導流',color:'gc-teal'},
+  {label:'搜集用戶輪廓',color:'gc-blue'},
+  {label:'增加線上互動',color:'gc-green'},
+  {label:'提高會員活躍度',color:'gc-purple'},
+  {label:'沉浸式互動體驗',color:'gc-purple'},
+];
+const GOAL_COLOR_MAP = Object.fromEntries(GOAL_OPTS.map(g=>[g.label,g.color]));
+const getGoalColor = l => GOAL_COLOR_MAP[l] || 'gc-blue';
+
+const KIT_GROUPS = [
+  { group:'邏輯套件', kits:['條件分流','定時推播'] },
+  { group:'進階套件', kits:['帳號綁定','問卷調查','輪盤抽獎','盲盒','刮刮樂','角色人物','發票登錄','集點卡','MGM','每日簽到','獎項發放','序號驗證','隨機回覆'] },
+  { group:'其他', kits:['參數儲存','標籤儲存','圖文訊息','Rich Menu','導流工具','旅程圖'] },
+];
+
+/* ─── HELPERS ─── */
+const GEMINI_API_KEY = 'AIzaSyCvZ9US1Ropzg4a1qKwyybCANcFRsVLtAY'; // 換成你的 Google AI Studio Key
+async function callClaude(prompt){
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+  const r = await fetch(url,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{parts:[{text:prompt}]}],
+      generationConfig:{temperature:0.7,maxOutputTokens:1500}
+    })
+  });
+  const d = await r.json();
+  if(d.error) throw new Error(d.error.message);
+  const txt = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  const jsonMatch = txt.match(/\{[\s\S]*\}/);
+  if(!jsonMatch) throw new Error('No JSON in response: ' + txt.substring(0,100));
+  return jsonMatch[0].trim();
+}
+
+function fileToDataURL(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
+}
+
+/* ─── CHIP INPUT ─── */
+function ChipInput({chips,onChange,placeholder}){
+  const [val,setVal]=useState('');
+  const add=()=>{
+    const parts=val.split(/[,，\n]/).map(s=>s.trim()).filter(Boolean);
+    if(parts.length){onChange([...chips,...parts.filter(p=>!chips.includes(p))]);setVal('')}
+  };
+  const onKey=e=>{if(e.key==='Enter'){e.preventDefault();add()}};
+  return(
+    <div className="chip-wrap" onClick={e=>e.currentTarget.querySelector('input').focus()}>
+      {chips.map(c=>(
+        <span key={c} className="chip">{c}<span className="chip-x" onClick={()=>onChange(chips.filter(x=>x!==c))}>✕</span></span>
+      ))}
+      <input value={val} onChange={e=>setVal(e.target.value)} onKeyDown={onKey} onBlur={add} placeholder={chips.length?'':placeholder}/>
+    </div>
+  );
+}
+
+/* ─── STEP 1: Basic Info ─── */
+function Step1({data,onChange,onNext}){
+  const logoRef=useRef();
+  const [logoPreview,setLogoPreview]=useState(data.logoPreview||null);
+
+  const handleLogo=async e=>{
+    const f=e.target.files[0];
+    if(!f)return;
+    const url=await fileToDataURL(f);
+    setLogoPreview(url);
+    onChange({...data,logoFile:f,logoPreview:url});
+  };
+
+  return(
+    <div>
+      <div className="section-head">基本資訊</div>
+      <div className="field-group">
+        <div className="field-label">品牌名稱 <span className="req">必填</span></div>
+        <input type="text" value={data.brand} onChange={e=>onChange({...data,brand:e.target.value})} placeholder="例：全聯福利中心"/>
+      </div>
+
+      <div className="field-group">
+        <div className="field-label">方案</div>
+        <div className="radio-row">
+          {['品牌方案','電商方案','其他'].map(p=>(
+            <label key={p} className={`radio-opt${data.plan===p?' sel':''}`}>
+              <input type="radio" checked={data.plan===p} onChange={()=>onChange({...data,plan:p})}/>
+              {p}
+            </label>
+          ))}
+        </div>
+        {data.plan==='其他'&&(
+          <div style={{marginTop:8}}>
+            <input type="text" value={data.planOther||''} onChange={e=>onChange({...data,planOther:e.target.value})} placeholder="請描述方案名稱"/>
+          </div>
+        )}
+      </div>
+
+      <div className="field-group">
+        <div className="field-label">是否有客製化？</div>
+        <div className="radio-row">
+          {['有','無'].map(v=>(
+            <label key={v} className={`radio-opt${data.custom===v?' sel':''}`}>
+              <input type="radio" checked={data.custom===v} onChange={()=>onChange({...data,custom:v})}/>
+              {v}
+            </label>
+          ))}
+        </div>
+        {data.custom==='有'&&(
+          <div style={{marginTop:8}}>
+            <input type="text" value={data.customDetail||''} onChange={e=>onChange({...data,customDetail:e.target.value})} placeholder="說明客製化內容"/>
+          </div>
+        )}
+      </div>
+
+      <div className="field-group">
+        <div className="field-label">活動期間</div>
+        <input type="text" value={data.period||''} onChange={e=>onChange({...data,period:e.target.value})} placeholder="例：2025/12/01 ~ 2026/01/08"/>
+      </div>
+
+      <div className="section-head">品牌 Logo <span style={{fontSize:10,color:'#b0acc8',fontWeight:400,letterSpacing:0}}>（選填，需符合客戶授權規範）</span></div>
+      <div className="field-group">
+        {logoPreview ? (
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <img src={logoPreview} className="logo-preview" alt="logo"/>
+            <button className="btog" style={{fontSize:12}} onClick={()=>{setLogoPreview(null);onChange({...data,logoFile:null,logoPreview:null})}}>移除</button>
+          </div>
+        ):(
+          <div className="upload-zone" onClick={()=>logoRef.current.click()}>
+            <div className="upload-label">點擊上傳 Logo（PNG / SVG 優先，背景透明最佳）</div>
+          </div>
+        )}
+        <input ref={logoRef} type="file" accept="image/*" style={{display:'none'}} onChange={handleLogo}/>
+      </div>
+
+      <div className="nav-row">
+        <button className="btn-next" onClick={onNext} disabled={!data.brand.trim()}>下一步：行銷套件 →</button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── STEP 2: Kits & Screenshots ─── */
+function Step2({data,onChange,onNext,onBack}){
+  const screenRef=useRef();
+  const [customKits,setCustomKits]=useState(data.customKits||[]);
+
+  const toggleKit=kit=>{
+    const next=data.kits.includes(kit)?data.kits.filter(k=>k!==kit):[...data.kits,kit];
+    onChange({...data,kits:next});
+  };
+
+  const handleScreens=async e=>{
+    const files=Array.from(e.target.files);
+    const newPreviews=await Promise.all(files.map(fileToDataURL));
+    const prev=data.screenshots||[];
+    onChange({...data,screenshots:[...prev,...newPreviews]});
+  };
+
+  const removeScreen=i=>{
+    const s=[...(data.screenshots||[])];
+    s.splice(i,1);
+    onChange({...data,screenshots:s});
+  };
+
+  return(
+    <div>
+      <div className="section-head">行銷套件</div>
+      {KIT_GROUPS.map(({group,kits})=>(
+        <div key={group} className="kit-group">
+          <div className="kit-group-label">{group}</div>
+          <div className="badge-group">
+            {kits.map(k=>(
+              <button key={k} className={`btog${data.kits.includes(k)?' on':''}`} onClick={()=>toggleKit(k)}>{k}</button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <div style={{marginTop:6}}>
+        <div className="field-label" style={{marginBottom:5}}>其他套件 <span className="hint">（不在上方選項的，輸入後按 Enter 或用 , 分隔）</span></div>
+        <ChipInput chips={customKits} onChange={v=>{setCustomKits(v);onChange({...data,customKits:v})}} placeholder="輸入後按 Enter 或用 , 分隔"/>
+      </div>
+
+      <div className="section-head" style={{marginTop:20}}>活動截圖 <span style={{fontSize:10,color:'#b0acc8',fontWeight:400,letterSpacing:0}}>（選填，最多 5 張，建議手機截圖）</span></div>
+      <div className={`upload-zone${(data.screenshots||[]).length?' has-files':''}`} onClick={()=>screenRef.current.click()}>
+        <div className="upload-label">點擊上傳活動截圖<br/><span style={{fontSize:11,color:'#c4c0e0'}}>PNG / JPG，建議長寬比 9:16 或 1:1</span></div>
+        {(data.screenshots||[]).length>0&&(
+          <div className="upload-thumb-row">
+            {(data.screenshots||[]).map((s,i)=>(
+              <div key={i} className="upload-thumb">
+                <img src={s} alt=""/>
+                <button className="rm" onClick={e=>{e.stopPropagation();removeScreen(i)}}>✕</button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <input ref={screenRef} type="file" accept="image/*" multiple style={{display:'none'}} onChange={handleScreens}/>
+
+      <div className="nav-row">
+        <button className="btn-back" onClick={onBack}>← 上一步</button>
+        <button className="btn-next" onClick={onNext}>下一步：活動描述 →</button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── STEP 3: Content Input ─── */
+function Step3({data,onChange,onGenerate,onBack,loading}){
+  return(
+    <div>
+      <div className="section-head">活動描述</div>
+      <div className="field-group">
+        <div className="field-label">活動流程與亮點 <span className="req">必填</span></div>
+        <div className="field-label" style={{marginBottom:6,marginTop:-2}}><span className="hint">把整段流程貼進來，AI 會拆解成四欄內容</span></div>
+        <textarea
+          rows={7}
+          value={data.description||''}
+          onChange={e=>onChange({...data,description:e.target.value})}
+          placeholder={"例：\n1. 推播通知 LINE 既有用戶，搭配 FB/IG 導流工具吸引用戶點擊\n2. 利用圖文訊息設計爬格子遊戲，用戶點擊獲得不同獎品\n3. 完成遊戲後再使用刮刮樂享有加碼抽獎機會"}
+        />
+      </div>
+
+      <div className="section-head">關鍵數據</div>
+      <div className="field-group">
+        <div className="field-label">貼入原始數據 <span className="hint">AI 會自動判斷哪些是亮點</span></div>
+        <textarea
+          rows={5}
+          value={data.rawMetrics||''}
+          onChange={e=>onChange({...data,rawMetrics:e.target.value})}
+          placeholder={"例：\n發送人數：56,795\n進到活動入口人數 14,485\n參與遊戲人數 15,979（平均每人 1.1 次）\n完整體驗兩個活動的參與率 92.6%（13,415/14,485）"}
+        />
+      </div>
+
+      <div className="nav-row">
+        <button className="btn-back" onClick={onBack}>← 上一步</button>
+        <button className="btn-next" onClick={onGenerate} disabled={loading||!data.description?.trim()}>
+          {loading&&<span className="spin"></span>}
+          {loading?'AI 生成中…':'✦ AI 生成文案'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── STEP 4: Goals ─── */
+function Step4({data,onChange,onNext,onBack,suggestedGoals,goalsLoading}){
+  return(
+    <div>
+      <div className="section-head">活動目標</div>
+      <p style={{fontSize:12,color:'#9490b8',marginBottom:12,lineHeight:1.6}}>根據你的活動內容，AI 推薦以下目標。你可以調整後進入預覽。</p>
+
+      {goalsLoading?(
+        <div className="gs-loading"><span className="spin" style={{borderTopColor:'#296AFF',borderColor:'#e8eeff'}}></span> 分析中…</div>
+      ):(
+        <div className="badge-group">
+          {GOAL_OPTS.map(g=>(
+            <button key={g.label} className={`btog${data.goals.includes(g.label)?' on':''}`} onClick={()=>{
+              const next=data.goals.includes(g.label)?data.goals.filter(x=>x!==g.label):[...data.goals,g.label];
+              onChange({...data,goals:next});
+            }}>{g.label}{suggestedGoals.includes(g.label)?' ✦':''}</button>
+          ))}
+        </div>
+      )}
+
+      <div className="nav-row">
+        <button className="btn-back" onClick={onBack}>← 修改文案</button>
+        <button className="btn-next" onClick={onNext}>預覽 One-Pager →</button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── EDITABLE FIELD ─── */
+function Editable({tag:Tag='span',className,value,onChange}){
+  const ref=useRef();
+  useEffect(()=>{if(ref.current&&ref.current.innerText!==value)ref.current.innerText=value},[value]);
+  return(
+    <Tag
+      ref={ref}
+      className={className}
+      contentEditable
+      suppressContentEditableWarning
+      onBlur={()=>onChange&&onChange(ref.current.innerText)}
+    />
+  );
+}
+
+/* ─── PREVIEW ─── */
+function Preview({data,result,setResult,onBack,onExport,exportLoading,exportDone}){
+  const addMetric=()=>{
+    setResult(r=>({...r,metrics:[...r.metrics,{value:'0',label:'新指標'}]}));
+  };
+  const updateMetric=(i,k,v)=>{
+    setResult(r=>{const m=[...r.metrics];m[i]={...m[i],[k]:v};return{...r,metrics:m}});
+  };
+  const removeMetric=i=>{
+    setResult(r=>({...r,metrics:r.metrics.filter((_,x)=>x!==i)}));
+  };
+
+  const allKits=[...data.kits,...(data.customKits||[])].join('、');
+  const planLabel=data.plan==='其他'?(data.planOther||'其他'):data.plan;
+  const customLabel=data.custom==='有'?(data.customDetail||'有'):data.custom==='無'?'無':'—';
+
+  return(
+    <div className="preview-wrap">
+      <div className="preview-actions">
+        <button className="pa-btn" onClick={onBack}>← 修改目標</button>
+        <button className="pa-btn" onClick={onBack}>↺ 重新生成</button>
+        {exportDone?(
+          <span className="pa-btn success">✓ PPTX 已下載！拖入 Google Drive 即可用 Slides 開啟</span>
+        ):(
+          <button className="pa-btn primary" onClick={onExport} disabled={exportLoading}>
+            {exportLoading&&<span className="spin"></span>}
+            {exportLoading?'產生中…':'⬇ 下載 PPTX'}
+          </button>
+        )}
+      </div>
+      <p style={{fontSize:11,color:'#b0acc8',marginBottom:16}}>所有文字欄位皆可直接點擊修改</p>
+
+      <div className="slide-canvas">
+        {/* Top */}
+        <div className="slide-top">
+          <div className="slide-brand">
+            {data.logoPreview
+              ?<div className="slide-logo-box"><img src={data.logoPreview} alt="logo"/></div>
+              :<div className="slide-logo-empty"></div>
+            }
+          </div>
+          <div className="slide-goals">
+            {result.goal_badges.map(g=>(
+              <span key={g} className={`slide-goal-chip ${getGoalColor(g)}`}>{g}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Titles */}
+        <div className="slide-titles">
+          <Editable tag="div" className="slide-headline" value={result.headline} onChange={v=>setResult(r=>({...r,headline:v}))}/>
+          <div style={{height:6}}/>
+          <Editable tag="div" className="slide-subtitle" value={result.subtitle} onChange={v=>setResult(r=>({...r,subtitle:v}))}/>
+        </div>
+
+        {/* 4 columns */}
+        <div className="slide-cols">
+          {[
+            {num:'01',head:'接觸點',tk:'touchpoint_title',bk:'touchpoint_body'},
+            {num:'02',head:'互動與體驗',tk:'interaction_title',bk:'interaction_body'},
+            {num:'03',head:'強化完成誘因',tk:'incentive_title',bk:'incentive_body'},
+            {num:'04',head:'目標與成效',tk:'outcome_title',bk:'outcome_body'},
+          ].map(col=>(
+            <div key={col.num} className="slide-col">
+              <div className="col-num">{col.num}</div>
+              <div className="col-head">{col.head}</div>
+              <Editable tag="div" className="col-title" value={result[col.tk]} onChange={v=>setResult(r=>({...r,[col.tk]:v}))}/>
+              <Editable tag="div" className="col-body" value={result[col.bk]} onChange={v=>setResult(r=>({...r,[col.bk]:v}))}/>
+              <div className="edit-hint">點擊可編輯</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Screenshots */}
+        {(data.screenshots||[]).length>0&&(
+          <div className="slide-screens">
+            {(data.screenshots||[]).slice(0,5).map((s,i)=>(
+              <div key={i} className="screen-img"><img src={s} alt=""/></div>
+            ))}
+            {(data.screenshots||[]).length<3&&
+              Array(3-(data.screenshots||[]).length).fill(0).map((_,i)=>(
+                <div key={'ph'+i} className="screen-placeholder">示意圖</div>
+              ))
+            }
+          </div>
+        )}
+
+        {/* Metrics */}
+        <div className="slide-metrics">
+          {result.metrics.map((m,i)=>(
+            <div key={i} className="metric-card" style={{position:'relative'}}>
+              <button onClick={()=>removeMetric(i)} style={{position:'absolute',top:5,right:7,background:'none',border:'none',color:'#d4d0ea',cursor:'pointer',fontSize:13}}>✕</button>
+              <Editable tag="div" className="metric-val" value={m.value} onChange={v=>updateMetric(i,'value',v)}/>
+              <Editable tag="div" className="metric-lbl" value={m.label} onChange={v=>updateMetric(i,'label',v)}/>
+            </div>
+          ))}
+          <div className="metric-add" onClick={addMetric}>+ 新增指標</div>
+        </div>
+
+        {/* Summary */}
+        <div className="slide-summary">
+          <div className="sum-label">案例總結</div>
+          <Editable tag="div" className="sum-text" value={result.summary} onChange={v=>setResult(r=>({...r,summary:v}))}/>
+        </div>
+
+        {/* Specs footer */}
+        <div className="slide-specs">
+          <span className="spec-chip"><strong>方案：</strong>{planLabel}</span>
+          <span className="spec-chip"><strong>套件：</strong>{allKits||'—'}</span>
+          <span className="spec-chip"><strong>客製化：</strong>{customLabel}</span>
+          {data.period&&<span className="spec-chip"><strong>期間：</strong>{data.period}</span>}
+          <span className="appier-logo">Appier</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── PASSWORD GATE ─── */
+const CORRECT_PW = 'appiercsm';
+
+function PasswordGate({onUnlock}){
+  const [pw,setPw]=useState('');
+  const [show,setShow]=useState(false);
+  const [err,setErr]=useState('');
+  const [shake,setShake]=useState(false);
+
+  const attempt=()=>{
+    if(pw===CORRECT_PW){
+      sessionStorage.setItem('bb_auth','1');
+      onUnlock();
+    }else{
+      setErr('密碼錯誤，請再試一次');
+      setShake(true);
+      setTimeout(()=>setShake(false),400);
+      setPw('');
+    }
+  };
+  const onKey=e=>{if(e.key==='Enter')attempt()};
+
+  return(
+    <div className="gate-wrap">
+      <div className="gate-card">
+        <div className="gate-logo">B</div>
+        <div className="gate-title">BotBonnie One-Pager AI</div>
+        <div className="gate-sub">Appier CSM 內部工具<br/>請輸入存取密碼以繼續</div>
+        <div className="gate-field">
+          <input
+            type={show?'text':'password'}
+            value={pw}
+            onChange={e=>{setPw(e.target.value);setErr('')}}
+            onKeyDown={onKey}
+            placeholder="輸入密碼"
+            className={shake?'err-shake':''}
+            autoFocus
+          />
+          <button className="gate-toggle" onClick={()=>setShow(s=>!s)} tabIndex={-1}>
+            {show?'🙈':'👁'}
+          </button>
+        </div>
+        <div className="gate-err">{err}</div>
+        <button className="gate-btn" onClick={attempt}>進入工具 →</button>
+        <div className="gate-footer">© Appier Group · 僅供內部使用</div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── ROOT WITH AUTH ─── */
+function Root(){
+  const [authed,setAuthed]=useState(()=>sessionStorage.getItem('bb_auth')==='1');
+  if(!authed)return <PasswordGate onUnlock={()=>setAuthed(true)}/>;
+  return <App/>;
+}
+
+/* ─── MAIN APP ─── */
+function App(){
+  const [step,setStep]=useState(1);
+  const [formData,setFormData]=useState({brand:'',plan:'品牌方案',custom:'無',period:'',kits:[],customKits:[],screenshots:[],description:'',rawMetrics:'',goals:[],logoPreview:null,logoFile:null});
+  const [result,setResult]=useState(null);
+  const [loading,setLoading]=useState(false);
+  const [error,setError]=useState('');
+  const [suggestedGoals,setSuggestedGoals]=useState([]);
+  const [goalsLoading,setGoalsLoading]=useState(false);
+  const [exportLoading,setExportLoading]=useState(false);
+  const [exportDone,setExportDone]=useState(false);
+
+  const generate=async()=>{
+    setLoading(true);setError('');
+    const allKits=[...formData.kits,...(formData.customKits||[])].join('、');
+    const prompt=`你是 BotBonnie（Appier 旗下 LINE 行銷自動化平台）的行銷文案專家。
+
+根據以下案例資訊，生成 One-Pager 文案。只輸出純 JSON，不要任何說明或 markdown。
+
+品牌：${formData.brand}
+方案：${formData.plan==='其他'?(formData.planOther||'其他'):formData.plan}
+套件：${allKits}
+活動期間：${formData.period||'不詳'}
+客製化：${formData.custom==='有'?(formData.customDetail||'有'):'無'}
+
+【活動描述】
+${formData.description}
+
+【原始數據】
+${formData.rawMetrics||'無'}
+
+請輸出此 JSON（繁體中文，行銷口吻，專業有說服力）：
+{
+  "headline": "品牌+核心做法+數據亮點，20~40字",
+  "subtitle": "一句補充說明，15~25字",
+  "touchpoint_title": "接觸點小標，8~12字",
+  "touchpoint_body": "接觸點說明，50~80字",
+  "interaction_title": "互動與體驗小標，8~12字",
+  "interaction_body": "互動與體驗說明，50~80字",
+  "incentive_title": "強化完成誘因小標，8~12字",
+  "incentive_body": "強化完成誘因說明，50~80字",
+  "outcome_title": "目標與成效小標，8~12字",
+  "outcome_body": "目標與成效說明，50~80字",
+  "metrics": [{"value":"數值如 90k+","label":"指標名稱"}],
+  "summary": "整體成果總結，60~90字",
+  "suggested_goals": ["從以下選擇最相關的3~4個：提升用戶互動、增加用戶活躍度、增加綁定用戶、增加 LINE 用戶、增加線下導購、舊客喚回、O2O 導流、搜集用戶輪廓、增加線上互動、提高會員活躍度、沉浸式互動體驗"]
+}`;
+    try{
+      const txt=await callClaude(prompt);
+      const parsed=JSON.parse(txt);
+      const goals=parsed.suggested_goals||[];
+      delete parsed.suggested_goals;
+      parsed.goal_badges=goals;
+      setResult(parsed);
+      setSuggestedGoals(goals);
+      setFormData(f=>({...f,goals:goals}));
+      setStep(4);
+    }catch(e){
+      setError('生成失敗，請稍後再試。'+e.message);
+    }finally{setLoading(false)}
+  };
+
+  const exportSlides=async()=>{
+    setExportLoading(true);
+    try{
+      const allKits=[...formData.kits,...(formData.customKits||[])].join('、');
+      const planLabel=formData.plan==='其他'?(formData.planOther||'其他'):formData.plan;
+      const customLabel=formData.custom==='有'?(formData.customDetail||'有'):'無';
+
+      const pres = new PptxGenJS();
+      pres.layout = 'LAYOUT_16x9'; // 10" x 5.625"
+      pres.title = `BotBonnie Case Study - ${formData.brand}`;
+
+      // ── EXACT COLORS FROM TEMPLATE ──
+      // ── APPIER BRAND GUIDELINES ──
+      const C = {
+        PRODUCT_BLUE: '296AFF',  // Product Blue — emphasis, col headers, metric cards
+        NAVY:         '1A234E',  // Neutral Navy — dark bg, headline block, data note
+        LOGO_BLUE:    '0321AA',  // Logo Blue — Appier logo accent only
+        LIGHT_BLUE:   'D4E0FF',  // spec box bg (derived from brand)
+        PALE_BLUE:    'C5D8FF',  // decorative bar light
+        MID_BLUE:     '5E8FFF',  // decorative bar mid
+        WHITE:        'FFFFFF',
+        BLACK:        '1A234E',  // use Navy as body text color
+        ORANGE:       'FF7C00',  // brand color block (keep for logo placeholder)
+      };
+
+      const makeShadow = () => ({type:'outer',blur:3,offset:2,angle:135,color:'000000',opacity:0.1});
+
+      const slide = pres.addSlide();
+      slide.background = { color: C.WHITE };
+
+      // ════════════════════════════════
+      // 1. GOAL BADGES (top left)  y=0.07
+      // ════════════════════════════════
+      const goals = result.goal_badges || [];
+      let gx = 0.145;
+      goals.slice(0,4).forEach(g => {
+        const gw = Math.min(g.length * 0.135 + 0.2, 1.8);
+        slide.addShape(pres.shapes.RECTANGLE,{x:gx,y:0.07,w:gw,h:0.246,fill:{color:C.PRODUCT_BLUE},line:{color:C.PRODUCT_BLUE}});
+        slide.addText(g,{x:gx,y:0.07,w:gw,h:0.246,fontSize:9,bold:true,color:C.WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+        gx += gw + 0.12;
+      });
+
+      // ════════════════════════════════
+      // 2. SPEC BOX (top right) — 方案/套件/客製化
+      // ════════════════════════════════
+      slide.addShape(pres.shapes.RECTANGLE,{x:8.539,y:0.07,w:1.398,h:0.606,fill:{color:C.LIGHT_BLUE},line:{color:C.LIGHT_BLUE}});
+      slide.addText(
+        `1. 方案：${planLabel}\n2. 行銷套件：${allKits||'—'}\n3. 客製化：${customLabel}`,
+        {x:8.56,y:0.08,w:1.36,h:0.58,fontSize:7,color:C.NAVY,align:'left',valign:'top',margin:3,fontFace:'Noto Sans TC',wrap:true}
+      );
+
+      // ════════════════════════════════
+      // 3. BRAND COLOR BLOCK + LOGO (left of headline)
+      // ════════════════════════════════
+      // Orange brand block
+      slide.addShape(pres.shapes.RECTANGLE,{x:0.248,y:0.384,w:0.825,h:0.677,fill:{color:C.ORANGE},line:{color:C.ORANGE}});
+      // Logo inside brand block
+      if(formData.logoPreview){
+        slide.addImage({data:formData.logoPreview,x:0.26,y:0.39,w:0.8,h:0.65,sizing:{type:'contain',w:0.8,h:0.65}});
+      } else {
+        slide.addText(formData.brand.substring(0,4),{x:0.248,y:0.384,w:0.825,h:0.677,fontSize:8,bold:true,color:C.WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+      }
+
+      // ════════════════════════════════
+      // 4. HEADLINE (blue bg, white text)
+      // ════════════════════════════════
+      slide.addShape(pres.shapes.RECTANGLE,{x:1.09,y:0.329,w:7.497,h:0.677,fill:{color:C.NAVY},line:{color:C.NAVY}});
+      slide.addText(result.headline,{x:1.13,y:0.335,w:7.38,h:0.665,fontSize:14,bold:false,color:C.WHITE,align:'left',valign:'middle',margin:4,fontFace:'Noto Sans TC',wrap:true});
+
+      // ════════════════════════════════
+      // 5. SUBTITLE (below headline, white bg)
+      // ════════════════════════════════
+      slide.addText(result.subtitle,{x:1.13,y:1.01,w:7.38,h:0.26,fontSize:11,color:C.BLACK,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+
+      // ════════════════════════════════
+      // 6. VERTICAL DECORATIVE BARS (4 columns)
+      // ════════════════════════════════
+      // Each col bar: thin vertical stripe at col left edge
+      const barColors = [C.MID_BLUE, C.PALE_BLUE, C.MID_BLUE, C.PALE_BLUE];
+      const barXs = [0.128, 1.285, 2.57, 4.952]; // rough col starts
+      // Actually from XML: x=1.285,2.57(~2.668),4.952,7.467 for the 4 col text boxes
+      // Vertical bars at x=0.128,1.284,3.301,5.733,7.885
+      [
+        {x:0.128,  color:C.MID_BLUE},
+        {x:1.284,  color:C.MID_BLUE},
+        {x:3.301,  color:C.PALE_BLUE},
+        {x:5.733,  color:C.MID_BLUE},
+        {x:7.885,  color:C.PALE_BLUE},
+      ].forEach(b=>{
+        slide.addShape(pres.shapes.RECTANGLE,{x:b.x,y:0.061,w:0.507,h:2.82,fill:{color:b.color},line:{color:b.color}});
+      });
+
+      // ════════════════════════════════
+      // 7. COLUMN HEADERS (blue bg, white text, 4 cols)
+      // ════════════════════════════════
+      const cols = [
+        {label:'接觸點',     x:0.356, w:1.856, title:result.touchpoint_title,  body:result.touchpoint_body},
+        {label:'互動與體驗', x:2.668, w:2.256, title:result.interaction_title, body:result.interaction_body},
+        {label:'強化完成誘因',x:5.373, w:1.66,  title:result.incentive_title,   body:result.incentive_body},
+        {label:'目標與成效', x:7.771, w:1.988, title:result.outcome_title,     body:result.outcome_body},
+      ];
+      const hdrY=1.14, hdrH=0.303;
+      cols.forEach(col=>{
+        slide.addShape(pres.shapes.RECTANGLE,{x:col.x,y:hdrY,w:col.w,h:hdrH,fill:{color:C.NAVY},line:{color:C.NAVY}});
+        slide.addText(col.label,{x:col.x,y:hdrY,w:col.w,h:hdrH,fontSize:12,bold:true,color:C.WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+      });
+
+      // ════════════════════════════════
+      // 8. COLUMN CONTENT (title bold + body)
+      // ════════════════════════════════
+      const contentY = 1.434;
+      cols.forEach(col=>{
+        // Title (bold)
+        slide.addText(col.title,{x:col.x,y:contentY,w:col.w,h:0.22,fontSize:8,bold:true,color:C.BLACK,align:'left',valign:'top',margin:0,fontFace:'Noto Sans TC',wrap:true});
+        // Body
+        slide.addText(col.body,{x:col.x,y:contentY+0.22,w:col.w,h:0.95,fontSize:8,bold:false,color:C.BLACK,align:'left',valign:'top',margin:0,fontFace:'Noto Sans TC',wrap:true});
+      });
+
+      // ════════════════════════════════
+      // 9. SCREENSHOTS (3 images, below columns)
+      // ════════════════════════════════
+      const screens = formData.screenshots || [];
+      const imgY = 2.5, imgH = 1.6;
+      const imgCount = Math.min(screens.length, 3);
+      if(imgCount > 0){
+        const totalW = 7.45;
+        const imgW = (totalW - (imgCount-1)*0.15) / imgCount;
+        screens.slice(0,3).forEach((s,i)=>{
+          slide.addImage({
+            data:s,
+            x:0.128+i*(imgW+0.15),
+            y:imgY,
+            w:imgW,
+            h:imgH,
+          });
+        });
+      }
+
+      // ════════════════════════════════
+      // 10. METRIC CARDS (right column, dark blue bg)
+      // ════════════════════════════════
+      const metrics = result.metrics || [];
+      const mX=7.505, mW=2.186, mH=0.769, mGap=0.072;
+      metrics.slice(0,3).forEach((m,i)=>{
+        const my = 2.908 + i*(mH+mGap);
+        slide.addShape(pres.shapes.ROUNDED_RECTANGLE,{x:mX,y:my,w:mW,h:mH,fill:{color:C.NAVY},line:{color:C.NAVY},rectRadius:0.12});
+        // Big number (left)
+        slide.addText(m.value,{x:mX+0.08,y:my+0.04,w:1.2,h:mH-0.08,fontSize:22,bold:true,color:C.WHITE,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+        // Label (right)
+        slide.addText(m.label,{x:mX+1.05,y:my+0.1,w:mW-1.1,h:mH-0.2,fontSize:12,bold:true,color:C.WHITE,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC',wrap:true});
+      });
+
+      // Data note
+      if(formData.period){
+        slide.addShape(pres.shapes.RECTANGLE,{x:mX,y:4.594,w:mW+0.125,h:0.498,fill:{color:C.NAVY},line:{color:C.NAVY}});
+        slide.addText(`* 活動數據來自 ${formData.period}`,{x:mX+0.05,y:4.61,w:mW+0.07,h:0.47,fontSize:8,color:C.WHITE,align:'left',valign:'top',margin:2,fontFace:'Noto Sans TC',wrap:true});
+      }
+
+      // ════════════════════════════════
+      // 11. FOOTER
+      // ════════════════════════════════
+      slide.addText('©Appier Group, Inc. (along with its subsidiaries) All rights reserved.',
+        {x:2.5,y:5.38,w:5,h:0.2,fontSize:7,color:'888888',align:'center',margin:0,fontFace:'Noto Sans TC'});
+      // Appier logo text
+      slide.addText('Appier',{x:0.13,y:5.32,w:1.2,h:0.26,fontSize:14,bold:true,color:C.NAVY,align:'left',valign:'middle',margin:0,fontFace:'Georgia'});
+
+      // ── DOWNLOAD ──
+      const fname=`BotBonnie_CaseStudy_${formData.brand.replace(/\s/g,'_')}_${Date.now()}.pptx`;
+      await pres.writeFile({fileName:fname});
+      setExportDone(true);
+    }catch(e){
+      setError('PPTX 產生失敗：'+e.message);
+    }finally{setExportLoading(false)}
+  };
+
+  const STEPS=['基本資訊','行銷套件','活動描述','活動目標','預覽'];
+
+  return(
+    <div className="app">
+      {/* LEFT */}
+      <div className="left">
+        <div className="left-header">
+          <div className="logo-row">
+            <div className="logo-box">B</div>
+            <span className="logo-name">BotBonnie</span>
+            <span className="logo-tag">One-Pager AI</span>
+          </div>
+          <div className="left-sub">CSM 案例文案產生器 · Appier</div>
+        </div>
+
+        {/* Step tabs */}
+        <div className="steps-bar">
+          {STEPS.map((s,i)=>(
+            <div key={s} className={`step-tab${step===i+1?' active':step>i+1?' done':''}`} onClick={()=>step>i+1&&setStep(i+1)}>{s}</div>
+          ))}
+        </div>
+        <div className="progress">
+          {STEPS.map((_,i)=>(
+            <div key={i} className={`prog-dot${step>i+1?' done':step===i+1?' active':''}`}/>
+          ))}
+        </div>
+
+        <div className="left-body">
+          {step===1&&<Step1 data={formData} onChange={setFormData} onNext={()=>setStep(2)}/>}
+          {step===2&&<Step2 data={formData} onChange={setFormData} onNext={()=>setStep(3)} onBack={()=>setStep(1)}/>}
+          {step===3&&<Step3 data={formData} onChange={setFormData} onGenerate={generate} onBack={()=>setStep(2)} loading={loading}/>}
+          {step===4&&<Step4 data={formData} onChange={setFormData} onNext={()=>setStep(5)} onBack={()=>setStep(3)} suggestedGoals={suggestedGoals} goalsLoading={goalsLoading}/>}
+          {step===5&&<div style={{padding:'12px 0'}}>
+            <div style={{fontSize:13,color:'#9490b8',lineHeight:1.7,marginBottom:16}}>預覽模式：點擊右側任意文字欄位即可直接修改。</div>
+            <button className="btn-secondary" style={{width:'100%',marginBottom:8}} onClick={()=>setStep(4)}>← 修改目標</button>
+            <button className="btn-secondary" style={{width:'100%',marginBottom:8}} onClick={()=>{setResult(null);setStep(3)}}>↺ 重新生成文案</button>
+            {error&&<div className="err">{error}</div>}
+          </div>}
+          {error&&step!==5&&<div className="err">{error}</div>}
+        </div>
+      </div>
+
+      {/* RIGHT */}
+      <div className="right">
+        {!result||step<5?(
+          <div className="empty-state">
+            {loading?(
+              <div className="ai-loading">
+                <div className="big-spin"></div>
+                <p>AI 正在分析活動內容<br/>拆解四欄文案與數據亮點…</p>
+              </div>
+            ):(
+              <>
+                <div className="empty-icon">◈</div>
+                <h2>One-Pager 預覽區</h2>
+                <p>完成左側表單並點擊「AI 生成文案」，即可在此預覽可編輯的 One-Pager。</p>
+              </>
+            )}
+          </div>
+        ):(
+          <Preview
+            data={formData}
+            result={result}
+            setResult={setResult}
+            onBack={()=>setStep(4)}
+            onExport={exportSlides}
+            exportLoading={exportLoading}
+            exportDone={exportDone}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Root/>);
+</script>
+</body>
+</html>
