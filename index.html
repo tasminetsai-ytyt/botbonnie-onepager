@@ -265,7 +265,7 @@ const KIT_GROUPS = [
 ];
 
 /* ─── HELPERS ─── */
-const GEMINI_API_KEY = 'PASTE_YOUR_KEY_HERE'; // 換成你的 Google AI Studio Key
+const GEMINI_API_KEY = 'AIzaSyCvZ9US1Ropzg4a1qKwyybCANcFRsVLtAY'; // 換成你的 Google AI Studio Key
 async function callClaude(prompt){
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
   const r = await fetch(url,{
