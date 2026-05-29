@@ -141,76 +141,81 @@ select{cursor:pointer}
 .pa-btn.success{background:#ecfdf5;color:#059669;border-color:#6ee7b7}
 
 /* ── SLIDE CANVAS ── */
-.slide-canvas{background:#fff;border-radius:14px;border:1.5px solid #e2dff5;overflow:hidden;box-shadow:0 4px 24px rgba(91,79,255,.07)}
+.slide-canvas{background:#fff;border-radius:12px;border:1px solid #dde3f0;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.08)}
 
-/* top strip */
-.slide-top{background:#1A234E;padding:18px 28px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-.slide-brand{display:flex;align-items:center;gap:12px}
-.slide-logo-box{width:56px;height:36px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.slide-logo-box img{max-width:100%;max-height:100%;object-fit:contain}
-.slide-logo-empty{width:56px;height:36px;border-radius:7px;border:1.5px dashed rgba(255,255,255,.35);flex-shrink:0}
-.slide-goals{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
-.slide-goal-chip{font-size:11px;padding:3px 10px;border-radius:4px;font-weight:700;letter-spacing:.2px}
-.gc-blue{background:#dbeafe;color:#1d4ed8}
-.gc-green{background:#dcfce7;color:#15803d}
-.gc-amber{background:#fef9c3;color:#a16207}
-.gc-teal{background:#ccfbf1;color:#0f766e}
-.gc-pink{background:#fce7f3;color:#9d174d}
-.gc-purple{background:#e8eeff;color:#296AFF}
+/* ── TOP BAR: goal badges left, spec box right ── */
+.slide-top{background:#fff;padding:8px 14px 6px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid #eef0f8}
+.slide-goals{display:flex;flex-wrap:wrap;gap:5px}
+.slide-goal-chip{font-size:10px;padding:2px 10px;font-weight:700;color:#fff;background:#286AFF;border-radius:3px}
+.slide-spec-box{background:#D4E0FF;border-radius:3px;padding:4px 8px;font-size:9px;color:#1A234E;line-height:1.6;white-space:pre-wrap;flex-shrink:0;max-width:180px}
 
-.slide-titles{padding:22px 28px 18px;border-bottom:1px solid #f0eeff}
-.slide-headline{font-size:19px;font-weight:900;color:#1a1830;line-height:1.3;letter-spacing:-.3px;margin-bottom:6px}
-.slide-headline[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
-.slide-headline[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
-.slide-subtitle{font-size:13px;color:#8784a8;line-height:1.6}
-.slide-subtitle[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
-.slide-subtitle[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+/* ── BRAND + HEADLINE ROW ── */
+.slide-title-row{display:grid;grid-template-columns:80px 1fr;align-items:stretch;min-height:58px}
+.slide-brand-block{background:#F0F4FF;border:1.5px solid #D4E0FF;display:flex;align-items:center;justify-content:center;padding:6px}
+.slide-brand-block img{max-width:68px;max-height:46px;object-fit:contain}
+.slide-brand-text{font-size:9px;font-weight:700;color:#286AFF;text-align:center;line-height:1.3;padding:4px}
+.slide-headline-block{background:#286AFF;padding:8px 14px;display:flex;align-items:center}
+.slide-headline{font-size:14px;font-weight:700;color:#fff;line-height:1.3;letter-spacing:-.2px}
+.slide-headline[contenteditable]{outline:none}
+.slide-headline[contenteditable]:focus{background:rgba(255,255,255,.15);border-radius:3px}
 
-/* four columns */
-.slide-cols{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #f0eeff}
-.slide-col{padding:16px 18px;border-right:1px solid #f0eeff;position:relative}
+/* ── SUBTITLE ── */
+.slide-subtitle-row{padding:5px 14px 5px 14px;border-bottom:1px solid #eef0f8}
+.slide-subtitle{font-size:11px;color:#444;line-height:1.5}
+.slide-subtitle[contenteditable]{outline:none}
+.slide-subtitle[contenteditable]:focus{background:#f0f4ff;border-radius:3px}
+
+/* ── 4 COLUMNS ── */
+.slide-cols{display:grid;grid-template-columns:1fr 1.2fr 0.9fr 1.1fr;border-bottom:1px solid #eef0f8}
+.slide-col{border-right:1px solid #eef0f8;position:relative}
 .slide-col:last-child{border-right:none}
-.col-num{font-size:9px;background:#e8eeff;color:#296AFF;border-radius:3px;padding:1px 5px;font-weight:700;margin-bottom:7px;display:inline-block}
-.col-head{font-size:9.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:#b0acc8;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid #f0eeff}
-.col-title{font-size:12.5px;font-weight:700;color:#2d2b4e;margin-bottom:6px;line-height:1.35}
-.col-title[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
-.col-title[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
-.col-body{font-size:11.5px;color:#6e6a90;line-height:1.7}
-.col-body[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
-.col-body[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
-.edit-hint{font-size:10px;color:#d0cce8;margin-top:6px;font-style:italic;display:none}
-.slide-col:hover .edit-hint{display:block}
+.col-head{padding:5px 10px;font-size:11px;font-weight:700;color:#fff;text-align:center}
+.slide-col:nth-child(odd) .col-head{background:#4786FF}
+.slide-col:nth-child(even) .col-head{background:#8FB5FF}
+.col-inner{padding:10px}
+.col-title{font-size:11px;font-weight:700;color:#000;margin-bottom:5px;line-height:1.35}
+.col-title[contenteditable]{outline:none}
+.col-title[contenteditable]:focus{background:#f0f4ff;border-radius:2px}
+.col-body{font-size:10px;color:#333;line-height:1.65}
+.col-body[contenteditable]{outline:none}
+.col-body[contenteditable]:focus{background:#f0f4ff;border-radius:2px}
 
-/* screenshots area */
-.slide-screens{padding:16px 28px;display:flex;gap:10px;background:#faf9ff;border-bottom:1px solid #f0eeff;flex-wrap:wrap}
-.screen-img{border-radius:12px;overflow:hidden;border:1.5px solid #e2dff5;height:130px;flex:1;min-width:100px;max-width:200px}
+/* ── SCREENSHOTS ── */
+.slide-screens{padding:10px 14px;display:flex;gap:8px;background:#f8f9fc;border-bottom:1px solid #eef0f8}
+.screen-img{border-radius:8px;overflow:hidden;height:110px;flex:1;min-width:80px;max-width:180px;border:1px solid #dde3f0}
 .screen-img img{width:100%;height:100%;object-fit:cover}
-.screen-placeholder{height:130px;flex:1;min-width:100px;max-width:200px;border-radius:12px;border:2px dashed #e2dff5;background:#f4f3f8;display:flex;align-items:center;justify-content:center;font-size:11px;color:#c4c0e0}
+.screen-placeholder{height:110px;flex:1;min-width:80px;border-radius:8px;border:2px dashed #dde3f0;background:#f4f6fb;display:flex;align-items:center;justify-content:center;font-size:10px;color:#bbb}
 
-/* metrics */
-.slide-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;padding:16px 28px;border-bottom:1px solid #f0eeff}
-.metric-card{background:#faf9ff;border:1.5px solid #e8eeff;border-radius:10px;padding:14px 12px;text-align:center}
-.metric-val{font-family:'Open Sans',sans-serif;font-size:26px;font-weight:700;color:#296AFF;line-height:1;margin-bottom:5px}
-.metric-val[contenteditable]{outline:none;border-radius:4px}
-.metric-val[contenteditable]:focus{background:#f5f3ff}
-.metric-lbl{font-size:11px;color:#9490b8;line-height:1.4}
-.metric-lbl[contenteditable]{outline:none;border-radius:4px}
-.metric-lbl[contenteditable]:focus{background:#f5f3ff}
-.metric-add{background:transparent;border:2px dashed #d8d4f0;border-radius:10px;padding:14px 12px;text-align:center;cursor:pointer;font-size:11px;color:#b0acc8;transition:all .15s}
+/* ── MAIN CONTENT ROW: left cols + right metrics ── */
+.slide-bottom-row{display:grid;grid-template-columns:1fr 220px}
+
+/* ── METRICS (right side) ── */
+.slide-metrics-col{padding:10px;background:#fafbff;border-left:1px solid #eef0f8;display:flex;flex-direction:column;gap:8px}
+.metric-card{background:#286AFF;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:8px;position:relative}
+.metric-val{font-size:22px;font-weight:700;color:#fff;font-family:'Open Sans',sans-serif;flex-shrink:0;min-width:60px}
+.metric-val[contenteditable]{outline:none}
+.metric-val[contenteditable]:focus{background:rgba(255,255,255,.2);border-radius:3px}
+.metric-lbl{font-size:11px;color:#fff;font-weight:600;line-height:1.3;flex:1}
+.metric-lbl[contenteditable]{outline:none}
+.metric-lbl[contenteditable]:focus{background:rgba(255,255,255,.2);border-radius:3px}
+.metric-add{background:transparent;border:2px dashed #dde3f0;border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-size:10px;color:#bbb}
 .metric-add:hover{border-color:#296AFF;color:#296AFF}
+.metric-rm{position:absolute;top:4px;right:6px;background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:12px}
+.data-note{background:#1A234E;border-radius:6px;padding:6px 8px;font-size:9px;color:#ccc;line-height:1.5}
 
-/* summary */
-.slide-summary{padding:16px 28px}
-.sum-label{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#296AFF;margin-bottom:7px}
-.sum-text{font-size:12px;color:#6e6a90;line-height:1.7}
-.sum-text[contenteditable]{outline:none;border-radius:4px;padding:2px 4px;margin:-2px -4px}
-.sum-text[contenteditable]:focus{background:#f5f3ff;box-shadow:0 0 0 2px #a89cf7}
+/* ── SUMMARY ── */
+.slide-summary{padding:10px 14px;border-top:1px solid #eef0f8}
+.sum-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#296AFF;margin-bottom:5px}
+.sum-text{font-size:11px;color:#444;line-height:1.65}
+.sum-text[contenteditable]{outline:none}
+.sum-text[contenteditable]:focus{background:#f0f4ff;border-radius:2px}
 
-/* specs footer */
-.slide-specs{padding:12px 28px;background:#faf9ff;border-top:1px solid #f0eeff;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
-.spec-chip{font-size:11px;background:#fff;border:1px solid #e2dff5;border-radius:6px;padding:3px 9px;color:#9490b8}
-.spec-chip strong{color:#5a567a;font-weight:600}
-.appier-logo{margin-left:auto;font-size:10px;color:#c4c0e0;font-weight:600;font-family:'Open Sans',sans-serif}
+/* ── FOOTER ── */
+.slide-footer{padding:7px 14px;background:#fafbff;border-top:1px solid #eef0f8;display:flex;justify-content:space-between;align-items:center}
+.slide-footer-specs{display:flex;flex-wrap:wrap;gap:6px}
+.spec-chip{font-size:10px;background:#fff;border:1px solid #dde3f0;border-radius:4px;padding:2px 7px;color:#888}
+.spec-chip strong{color:#555;font-weight:600}
+.appier-logo{font-size:11px;color:#1A234E;font-weight:700;font-family:'Open Sans',sans-serif}
 
 /* goal suggestion */
 .goal-suggestion-wrap{background:#fff;border:1.5px solid #e8eeff;border-radius:10px;padding:14px 16px;margin-top:16px}
@@ -265,7 +270,7 @@ const KIT_GROUPS = [
 ];
 
 /* ─── HELPERS ─── */
-const GEMINI_API_KEY = 'AIzaSyB_JDRpOmfjrlOKGaZ7WILIkfOOb1ltkzY'; // 換成你的 Google AI Studio Key
+const GEMINI_API_KEY = 'PASTE_YOUR_KEY_HERE'; // 換成你的 Google AI Studio Key
 async function callClaude(prompt){
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
   const r = await fetch(url,{
@@ -386,6 +391,11 @@ function Step1({data,onChange,onNext}){
           </div>
         )}
         <input ref={logoRef} type="file" accept="image/*" style={{display:'none'}} onChange={handleLogo}/>
+      </div>
+
+      <div className="field-group" style={{marginTop:8}}>
+        <div className="field-label">品牌描述 <span className="hint">（顯示在 Logo 旁，例：台灣知名社群接單平台）</span></div>
+        <input type="text" value={data.brandDesc||''} onChange={e=>onChange({...data,brandDesc:e.target.value})} placeholder="例：台灣知名零售通路"/>
       </div>
 
       <div className="nav-row">
@@ -574,91 +584,98 @@ function Preview({data,result,setResult,onBack,onExport,exportLoading,exportDone
       <p style={{fontSize:11,color:'#b0acc8',marginBottom:16}}>所有文字欄位皆可直接點擊修改</p>
 
       <div className="slide-canvas">
-        {/* Top */}
+
+        {/* TOP BAR: goal badges left, spec box right */}
         <div className="slide-top">
-          <div className="slide-brand">
-            {data.logoPreview
-              ?<div className="slide-logo-box"><img src={data.logoPreview} alt="logo"/></div>
-              :<div className="slide-logo-empty"></div>
-            }
-          </div>
           <div className="slide-goals">
             {result.goal_badges.map(g=>(
-              <span key={g} className={`slide-goal-chip ${getGoalColor(g)}`}>{g}</span>
+              <span key={g} className="slide-goal-chip">{g}</span>
             ))}
+          </div>
+          <div className="slide-spec-box">{`1. 方案：${planLabel}\n2. 套件：${allKits||'—'}\n3. 客製化：${customLabel}`}</div>
+        </div>
+
+        {/* BRAND BLOCK + HEADLINE */}
+        <div className="slide-title-row">
+          <div className="slide-brand-block">
+            {data.logoPreview
+              ?<img src={data.logoPreview} alt="logo"/>
+              :<div className="slide-brand-text">{data.brandDesc||data.brand}</div>
+            }
+          </div>
+          <div className="slide-headline-block">
+            <Editable tag="div" className="slide-headline" value={result.headline} onChange={v=>setResult(r=>({...r,headline:v}))}/>
           </div>
         </div>
 
-        {/* Titles */}
-        <div className="slide-titles">
-          <Editable tag="div" className="slide-headline" value={result.headline} onChange={v=>setResult(r=>({...r,headline:v}))}/>
-          <div style={{height:6}}/>
+        {/* SUBTITLE */}
+        <div className="slide-subtitle-row">
           <Editable tag="div" className="slide-subtitle" value={result.subtitle} onChange={v=>setResult(r=>({...r,subtitle:v}))}/>
         </div>
 
-        {/* 4 columns */}
+        {/* 4 COLUMNS */}
         <div className="slide-cols">
           {[
-            {num:'01',head:'接觸點',tk:'touchpoint_title',bk:'touchpoint_body'},
-            {num:'02',head:'互動與體驗',tk:'interaction_title',bk:'interaction_body'},
-            {num:'03',head:'強化完成誘因',tk:'incentive_title',bk:'incentive_body'},
-            {num:'04',head:'目標與成效',tk:'outcome_title',bk:'outcome_body'},
+            {head:'接觸點',    tk:'touchpoint_title',  bk:'touchpoint_body'},
+            {head:'互動與體驗',tk:'interaction_title', bk:'interaction_body'},
+            {head:'強化完成誘因',tk:'incentive_title',  bk:'incentive_body'},
+            {head:'目標與成效',tk:'outcome_title',     bk:'outcome_body'},
           ].map(col=>(
-            <div key={col.num} className="slide-col">
-              <div className="col-num">{col.num}</div>
+            <div key={col.head} className="slide-col">
               <div className="col-head">{col.head}</div>
-              <Editable tag="div" className="col-title" value={result[col.tk]} onChange={v=>setResult(r=>({...r,[col.tk]:v}))}/>
-              <Editable tag="div" className="col-body" value={result[col.bk]} onChange={v=>setResult(r=>({...r,[col.bk]:v}))}/>
-              <div className="edit-hint">點擊可編輯</div>
+              <div className="col-inner">
+                <Editable tag="div" className="col-title" value={result[col.tk]} onChange={v=>setResult(r=>({...r,[col.tk]:v}))}/>
+                <Editable tag="div" className="col-body"  value={result[col.bk]} onChange={v=>setResult(r=>({...r,[col.bk]:v}))}/>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Screenshots */}
+        {/* SCREENSHOTS */}
         {(data.screenshots||[]).length>0&&(
           <div className="slide-screens">
-            {(data.screenshots||[]).slice(0,5).map((s,i)=>(
+            {(data.screenshots||[]).slice(0,3).map((s,i)=>(
               <div key={i} className="screen-img"><img src={s} alt=""/></div>
             ))}
-            {(data.screenshots||[]).length<3&&
-              Array(3-(data.screenshots||[]).length).fill(0).map((_,i)=>(
-                <div key={'ph'+i} className="screen-placeholder">示意圖</div>
-              ))
-            }
           </div>
         )}
 
-        {/* Metrics */}
-        <div className="slide-metrics">
-          {result.metrics.map((m,i)=>(
-            <div key={i} className="metric-card" style={{position:'relative'}}>
-              <button onClick={()=>removeMetric(i)} style={{position:'absolute',top:5,right:7,background:'none',border:'none',color:'#d4d0ea',cursor:'pointer',fontSize:13}}>✕</button>
-              <Editable tag="div" className="metric-val" value={m.value} onChange={v=>updateMetric(i,'value',v)}/>
-              <Editable tag="div" className="metric-lbl" value={m.label} onChange={v=>updateMetric(i,'label',v)}/>
-            </div>
-          ))}
-          <div className="metric-add" onClick={addMetric}>+ 新增指標</div>
+        {/* BOTTOM ROW: summary left, metrics right */}
+        <div className="slide-bottom-row">
+          <div className="slide-summary">
+            <div className="sum-label">案例總結</div>
+            <Editable tag="div" className="sum-text" value={result.summary} onChange={v=>setResult(r=>({...r,summary:v}))}/>
+          </div>
+          <div className="slide-metrics-col">
+            {result.metrics.map((m,i)=>(
+              <div key={i} className="metric-card">
+                <button className="metric-rm" onClick={()=>removeMetric(i)}>✕</button>
+                <Editable tag="div" className="metric-val" value={m.value} onChange={v=>updateMetric(i,'value',v)}/>
+                <Editable tag="div" className="metric-lbl" value={m.label} onChange={v=>updateMetric(i,'label',v)}/>
+              </div>
+            ))}
+            <div className="metric-add" onClick={addMetric}>+ 新增指標</div>
+            {data.period&&<div className="data-note">* 活動數據來自 {data.period}</div>}
+          </div>
         </div>
 
-        {/* Summary */}
-        <div className="slide-summary">
-          <div className="sum-label">案例總結</div>
-          <Editable tag="div" className="sum-text" value={result.summary} onChange={v=>setResult(r=>({...r,summary:v}))}/>
-        </div>
-
-        {/* Specs footer */}
-        <div className="slide-specs">
-          <span className="spec-chip"><strong>方案：</strong>{planLabel}</span>
-          <span className="spec-chip"><strong>套件：</strong>{allKits||'—'}</span>
-          <span className="spec-chip"><strong>客製化：</strong>{customLabel}</span>
-          {data.period&&<span className="spec-chip"><strong>期間：</strong>{data.period}</span>}
+        {/* FOOTER */}
+        <div className="slide-footer">
+          <div className="slide-footer-specs">
+            <span className="spec-chip"><strong>方案：</strong>{planLabel}</span>
+            <span className="spec-chip"><strong>套件：</strong>{allKits||'—'}</span>
+            <span className="spec-chip"><strong>客製化：</strong>{customLabel}</span>
+            {data.period&&<span className="spec-chip"><strong>期間：</strong>{data.period}</span>}
+          </div>
           <span className="appier-logo">Appier</span>
         </div>
+
       </div>
     </div>
   );
 }
 
+/* ─── PASSWORD GATE
 /* ─── PASSWORD GATE ─── */
 const CORRECT_PW = 'appiercsm';
 
@@ -786,166 +803,125 @@ ${formData.rawMetrics||'無'}
       const customLabel=formData.custom==='有'?(formData.customDetail||'有'):'無';
 
       const pres = new PptxGenJS();
-      pres.layout = 'LAYOUT_16x9'; // 10" x 5.625"
+      pres.layout = 'LAYOUT_16x9';
       pres.title = `BotBonnie Case Study - ${formData.brand}`;
 
-      // ── EXACT COLORS FROM TEMPLATE ──
-      // ── APPIER BRAND GUIDELINES ──
-      const C = {
-        PRODUCT_BLUE: '296AFF',  // Product Blue — emphasis, col headers, metric cards
-        NAVY:         '1A234E',  // Neutral Navy — dark bg, headline block, data note
-        LOGO_BLUE:    '0321AA',  // Logo Blue — Appier logo accent only
-        LIGHT_BLUE:   'D4E0FF',  // spec box bg (derived from brand)
-        PALE_BLUE:    'C5D8FF',  // decorative bar light
-        MID_BLUE:     '5E8FFF',  // decorative bar mid
-        WHITE:        'FFFFFF',
-        BLACK:        '1A234E',  // use Navy as body text color
-        ORANGE:       'FF7C00',  // brand color block (keep for logo placeholder)
-      };
-
-      const makeShadow = () => ({type:'outer',blur:3,offset:2,angle:135,color:'000000',opacity:0.1});
+      // ── EXACT COLORS (from template XML) ──
+      const BLUE   = '286AFF'; // headline bg, col headers
+      const NAVY   = '1A234E'; // metric cards, data note
+      const BADGE  = '286AFF'; // goal badges
+      const LGTBL  = 'D4E0FF'; // spec box bg
+      const BAR1   = '4786FF'; // decorative bar (solid)
+      const BAR2   = '8FB5FF'; // decorative bar (light)
+      const WHITE  = 'FFFFFF';
+      const BLACK  = '000000';
+      const ORANGE = 'FF7C00';
 
       const slide = pres.addSlide();
-      slide.background = { color: C.WHITE };
+      slide.background = {color: WHITE};
 
-      // ════════════════════════════════
-      // 1. GOAL BADGES (top left)  y=0.07
-      // ════════════════════════════════
+      // ── GOAL BADGES (top-left) exact from XML: y=0.07 h=0.246 ──
       const goals = result.goal_badges || [];
-      let gx = 0.145;
-      goals.slice(0,4).forEach(g => {
-        const gw = Math.min(g.length * 0.135 + 0.2, 1.8);
-        slide.addShape(pres.shapes.RECTANGLE,{x:gx,y:0.07,w:gw,h:0.246,fill:{color:C.PRODUCT_BLUE},line:{color:C.PRODUCT_BLUE}});
-        slide.addText(g,{x:gx,y:0.07,w:gw,h:0.246,fontSize:9,bold:true,color:C.WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+      let gx = 0.146;
+      goals.slice(0,4).forEach(g=>{
+        const gw = Math.min(g.length*0.13+0.3, 1.8);
+        slide.addShape(pres.shapes.RECTANGLE,{x:gx,y:0.07,w:gw,h:0.246,fill:{color:BADGE},line:{color:BADGE,width:0}});
+        slide.addText(g,{x:gx,y:0.07,w:gw,h:0.246,fontSize:9,bold:true,color:WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
         gx += gw + 0.12;
       });
 
-      // ════════════════════════════════
-      // 2. SPEC BOX (top right) — 方案/套件/客製化
-      // ════════════════════════════════
-      slide.addShape(pres.shapes.RECTANGLE,{x:8.539,y:0.07,w:1.398,h:0.606,fill:{color:C.LIGHT_BLUE},line:{color:C.LIGHT_BLUE}});
-      slide.addText(
-        `1. 方案：${planLabel}\n2. 行銷套件：${allKits||'—'}\n3. 客製化：${customLabel}`,
-        {x:8.56,y:0.08,w:1.36,h:0.58,fontSize:7,color:C.NAVY,align:'left',valign:'top',margin:3,fontFace:'Noto Sans TC',wrap:true}
-      );
+      // ── SPEC BOX (top-right) x=8.539 y=0.07 w=1.398 h=0.606 ──
+      slide.addShape(pres.shapes.RECTANGLE,{x:8.539,y:0.07,w:1.398,h:0.606,fill:{color:LGTBL},line:{color:LGTBL,width:0}});
+      slide.addText(`1. 方案：${planLabel}\n2. 行銷套件：${allKits||'—'}\n3. 客製化：${customLabel}`,
+        {x:8.56,y:0.08,w:1.36,h:0.58,fontSize:7,color:'1A234E',align:'left',valign:'top',margin:3,fontFace:'Noto Sans TC',wrap:true});
 
-      // ════════════════════════════════
-      // 3. BRAND COLOR BLOCK + LOGO (left of headline)
-      // ════════════════════════════════
-      // Orange brand block
-      slide.addShape(pres.shapes.RECTANGLE,{x:0.248,y:0.384,w:0.825,h:0.677,fill:{color:C.ORANGE},line:{color:C.ORANGE}});
-      // Logo inside brand block
+      // ── BRAND BLOCK (x=0.248 y=0.384 w=0.825 h=0.677) ──
+      slide.addShape(pres.shapes.RECTANGLE,{x:0.248,y:0.384,w:0.825,h:0.677,fill:{color:'F0F4FF'},line:{color:'D4E0FF',width:1}});
       if(formData.logoPreview){
-        slide.addImage({data:formData.logoPreview,x:0.26,y:0.39,w:0.8,h:0.65,sizing:{type:'contain',w:0.8,h:0.65}});
+        slide.addImage({data:formData.logoPreview,x:0.26,y:0.395,w:0.8,h:0.645,sizing:{type:'contain',w:0.8,h:0.645}});
       } else {
-        slide.addText(formData.brand.substring(0,4),{x:0.248,y:0.384,w:0.825,h:0.677,fontSize:8,bold:true,color:C.WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+        slide.addText(formData.brandDesc||formData.brand,{x:0.248,y:0.384,w:0.825,h:0.677,fontSize:8,bold:true,color:'286AFF',align:'center',valign:'middle',margin:2,fontFace:'Noto Sans TC',wrap:true});
       }
 
-      // ════════════════════════════════
-      // 4. HEADLINE (blue bg, white text)
-      // ════════════════════════════════
-      slide.addShape(pres.shapes.RECTANGLE,{x:1.09,y:0.329,w:7.497,h:0.677,fill:{color:C.NAVY},line:{color:C.NAVY}});
-      slide.addText(result.headline,{x:1.13,y:0.335,w:7.38,h:0.665,fontSize:14,bold:false,color:C.WHITE,align:'left',valign:'middle',margin:4,fontFace:'Noto Sans TC',wrap:true});
+      // ── HEADLINE BLOCK (x=1.09 y=0.329 w=7.497 h=0.677) ──
+      slide.addShape(pres.shapes.RECTANGLE,{x:1.09,y:0.329,w:7.497,h:0.677,fill:{color:BLUE},line:{color:BLUE,width:0}});
+      slide.addText(result.headline,{x:1.13,y:0.329,w:7.38,h:0.677,fontSize:13,bold:true,color:WHITE,align:'left',valign:'middle',margin:5,fontFace:'Noto Sans TC',wrap:true,charSpacing:0});
 
-      // ════════════════════════════════
-      // 5. SUBTITLE (below headline, white bg)
-      // ════════════════════════════════
-      slide.addText(result.subtitle,{x:1.13,y:1.01,w:7.38,h:0.26,fontSize:11,color:C.BLACK,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+      // ── SUBTITLE (x=1.09 y=1.01) ──
+      slide.addText(result.subtitle,{x:1.09,y:1.02,w:7.38,h:0.26,fontSize:10,color:BLACK,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
 
-      // ════════════════════════════════
-      // 6. VERTICAL DECORATIVE BARS (4 columns)
-      // ════════════════════════════════
-      // Each col bar: thin vertical stripe at col left edge
-      const barColors = [C.MID_BLUE, C.PALE_BLUE, C.MID_BLUE, C.PALE_BLUE];
-      const barXs = [0.128, 1.285, 2.57, 4.952]; // rough col starts
-      // Actually from XML: x=1.285,2.57(~2.668),4.952,7.467 for the 4 col text boxes
-      // Vertical bars at x=0.128,1.284,3.301,5.733,7.885
-      [
-        {x:0.128,  color:C.MID_BLUE},
-        {x:1.284,  color:C.MID_BLUE},
-        {x:3.301,  color:C.PALE_BLUE},
-        {x:5.733,  color:C.MID_BLUE},
-        {x:7.885,  color:C.PALE_BLUE},
+      // ── VERTICAL DECORATIVE BARS (exact from XML, drawn FIRST so text is on top) ──
+      // These are behind content — draw before text
+      [{x:0.128,y:0.036,h:2.862,c:BAR2},
+       {x:1.285,y:0.352,h:2.242,c:BAR1},
+       {x:3.301,y:0.051,h:2.842,c:BAR2},
+       {x:5.733,y:0.061,h:2.818,c:BAR1},
+       {x:7.885,y:0.036,h:2.862,c:BAR2},
       ].forEach(b=>{
-        slide.addShape(pres.shapes.RECTANGLE,{x:b.x,y:0.061,w:0.507,h:2.82,fill:{color:b.color},line:{color:b.color}});
+        slide.addShape(pres.shapes.RECTANGLE,{x:b.x,y:b.y,w:0.228,h:b.h,fill:{color:b.c},line:{color:b.c,width:0}});
       });
 
-      // ════════════════════════════════
-      // 7. COLUMN HEADERS (blue bg, white text, 4 cols)
-      // ════════════════════════════════
-      const cols = [
-        {label:'接觸點',     x:0.356, w:1.856, title:result.touchpoint_title,  body:result.touchpoint_body},
-        {label:'互動與體驗', x:2.668, w:2.256, title:result.interaction_title, body:result.interaction_body},
-        {label:'強化完成誘因',x:5.373, w:1.66,  title:result.incentive_title,   body:result.incentive_body},
-        {label:'目標與成效', x:7.771, w:1.988, title:result.outcome_title,     body:result.outcome_body},
+      // ── COLUMN HEADERS (exact from XML) ──
+      // [08] x=0.356 y=1.14  w=1.856 h=0.303
+      // [09] x=2.668 y=1.139 w=2.256 h=0.370
+      // [10] x=5.373 y=1.144 w=1.660 h=0.303
+      // [11] x=7.771 y=1.130 w=1.988 h=0.295
+      const COLS = [
+        {label:'接觸點',      x:0.356, y:1.14,  w:1.856, h:0.303, cx:0.356, cw:1.856, title:result.touchpoint_title,  body:result.touchpoint_body},
+        {label:'互動與體驗',  x:2.668, y:1.139, w:2.256, h:0.370, cx:2.668, cw:2.354, title:result.interaction_title, body:result.interaction_body},
+        {label:'強化完成誘因',x:5.373, y:1.144, w:1.660, h:0.303, cx:4.952, cw:2.479, title:result.incentive_title,   body:result.incentive_body},
+        {label:'目標與成效',  x:7.771, y:1.130, w:1.988, h:0.295, cx:7.467, cw:2.479, title:result.outcome_title,     body:result.outcome_body},
       ];
-      const hdrY=1.14, hdrH=0.303;
-      cols.forEach(col=>{
-        slide.addShape(pres.shapes.RECTANGLE,{x:col.x,y:hdrY,w:col.w,h:hdrH,fill:{color:C.NAVY},line:{color:C.NAVY}});
-        slide.addText(col.label,{x:col.x,y:hdrY,w:col.w,h:hdrH,fontSize:12,bold:true,color:C.WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+      const COL_HDR_COLORS = ['4786FF','8FB5FF','4786FF','8FB5FF'];
+      COLS.forEach((col,ci)=>{
+        // Header bg - alternating solid colors matching decorative bars behind
+        const hc = COL_HDR_COLORS[ci];
+        slide.addShape(pres.shapes.RECTANGLE,{x:col.x,y:col.y,w:col.w,h:col.h,
+          fill:{color:hc},line:{color:hc,width:0}});
+        // Header text
+        slide.addText(col.label,{x:col.x,y:col.y,w:col.w,h:col.h,fontSize:12,bold:true,color:WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+        // Content: title bold + body
+        // [03] x=0.128 y=1.434 w=2.427 h=0.801 (col 1 text box from XML)
+        slide.addText(col.title,{x:col.cx,y:1.434,w:col.cw,h:0.22,fontSize:8.5,bold:true,color:BLACK,align:'left',valign:'top',margin:0,fontFace:'Noto Sans TC',wrap:true});
+        slide.addText(col.body, {x:col.cx,y:1.66, w:col.cw,h:0.82,fontSize:8,  bold:false,color:BLACK,align:'left',valign:'top',margin:0,fontFace:'Noto Sans TC',wrap:true});
       });
 
-      // ════════════════════════════════
-      // 8. COLUMN CONTENT (title bold + body)
-      // ════════════════════════════════
-      const contentY = 1.434;
-      cols.forEach(col=>{
-        // Title (bold)
-        slide.addText(col.title,{x:col.x,y:contentY,w:col.w,h:0.22,fontSize:8,bold:true,color:C.BLACK,align:'left',valign:'top',margin:0,fontFace:'Noto Sans TC',wrap:true});
-        // Body
-        slide.addText(col.body,{x:col.x,y:contentY+0.22,w:col.w,h:0.95,fontSize:8,bold:false,color:C.BLACK,align:'left',valign:'top',margin:0,fontFace:'Noto Sans TC',wrap:true});
-      });
-
-      // ════════════════════════════════
-      // 9. SCREENSHOTS (3 images, below columns)
-      // ════════════════════════════════
-      const screens = formData.screenshots || [];
-      const imgY = 2.5, imgH = 1.6;
-      const imgCount = Math.min(screens.length, 3);
-      if(imgCount > 0){
-        const totalW = 7.45;
-        const imgW = (totalW - (imgCount-1)*0.15) / imgCount;
-        screens.slice(0,3).forEach((s,i)=>{
-          slide.addImage({
-            data:s,
-            x:0.128+i*(imgW+0.15),
-            y:imgY,
-            w:imgW,
-            h:imgH,
-          });
+      // ── SCREENSHOTS (x=0.128, 3 images across left 7.3") ──
+      const screens = formData.screenshots||[];
+      const imgY=2.5, imgH=1.55, totalImgW=7.35;
+      const nImg = Math.min(screens.length, 3);
+      if(nImg>0){
+        const imgW = (totalImgW-(nImg-1)*0.12)/nImg;
+        screens.slice(0,nImg).forEach((s,i)=>{
+          slide.addImage({data:s,x:0.128+i*(imgW+0.12),y:imgY,w:imgW,h:imgH});
         });
       }
 
-      // ════════════════════════════════
-      // 10. METRIC CARDS (right column, dark blue bg)
-      // ════════════════════════════════
-      const metrics = result.metrics || [];
-      const mX=7.505, mW=2.186, mH=0.769, mGap=0.072;
+      // ── METRIC CARDS (right side, exact from XML) ──
+      // [19] x=7.505 y=2.908 w=2.186 h=0.769  (card bg)
+      // [20] x=7.708 y=2.93  w=1.193 h=0.689  (big number)
+      // [21] x=8.677 y=3.053 w=0.825 h=0.478  (label)
+      const metrics = result.metrics||[];
+      const mX=7.505, mW=2.186, mH=0.769, mGap=0.053;
       metrics.slice(0,3).forEach((m,i)=>{
         const my = 2.908 + i*(mH+mGap);
-        slide.addShape(pres.shapes.ROUNDED_RECTANGLE,{x:mX,y:my,w:mW,h:mH,fill:{color:C.NAVY},line:{color:C.NAVY},rectRadius:0.12});
-        // Big number (left)
-        slide.addText(m.value,{x:mX+0.08,y:my+0.04,w:1.2,h:mH-0.08,fontSize:22,bold:true,color:C.WHITE,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
-        // Label (right)
-        slide.addText(m.label,{x:mX+1.05,y:my+0.1,w:mW-1.1,h:mH-0.2,fontSize:12,bold:true,color:C.WHITE,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC',wrap:true});
+        slide.addShape(pres.shapes.ROUNDED_RECTANGLE,{x:mX,y:my,w:mW,h:mH,fill:{color:BLUE},line:{color:BLUE,width:0},rectRadius:0.1});
+        slide.addText(m.value,{x:mX+0.08,y:my+0.03,w:1.1,h:mH-0.06,fontSize:20,bold:true,color:WHITE,align:'center',valign:'middle',margin:0,fontFace:'Noto Sans TC'});
+        slide.addText(m.label,{x:mX+1.15,y:my+0.1, w:mW-1.2,h:mH-0.2,fontSize:11,bold:true,color:WHITE,align:'left',valign:'middle',margin:0,fontFace:'Noto Sans TC',wrap:true});
       });
 
-      // Data note
+      // ── DATA NOTE (x=7.596 y=4.594 w=2.311 h=0.498) ──
       if(formData.period){
-        slide.addShape(pres.shapes.RECTANGLE,{x:mX,y:4.594,w:mW+0.125,h:0.498,fill:{color:C.NAVY},line:{color:C.NAVY}});
-        slide.addText(`* 活動數據來自 ${formData.period}`,{x:mX+0.05,y:4.61,w:mW+0.07,h:0.47,fontSize:8,color:C.WHITE,align:'left',valign:'top',margin:2,fontFace:'Noto Sans TC',wrap:true});
+        slide.addShape(pres.shapes.RECTANGLE,{x:7.596,y:4.594,w:2.311,h:0.498,fill:{color:NAVY},line:{color:NAVY,width:0}});
+        slide.addText(`* 活動數據來自 ${formData.period}`,{x:7.62,y:4.61,w:2.27,h:0.46,fontSize:8,color:WHITE,align:'left',valign:'top',margin:2,fontFace:'Noto Sans TC',wrap:true});
       }
 
-      // ════════════════════════════════
-      // 11. FOOTER
-      // ════════════════════════════════
+      // ── FOOTER ──
       slide.addText('©Appier Group, Inc. (along with its subsidiaries) All rights reserved.',
-        {x:2.5,y:5.38,w:5,h:0.2,fontSize:7,color:'888888',align:'center',margin:0,fontFace:'Noto Sans TC'});
-      // Appier logo text
-      slide.addText('Appier',{x:0.13,y:5.32,w:1.2,h:0.26,fontSize:14,bold:true,color:C.NAVY,align:'left',valign:'middle',margin:0,fontFace:'Georgia'});
+        {x:2.0,y:5.4,w:6,h:0.2,fontSize:7,color:'888888',align:'center',margin:0,fontFace:'Noto Sans TC'});
+      slide.addText('Appier',{x:0.13,y:5.33,w:1.2,h:0.24,fontSize:13,bold:true,color:'1A234E',align:'left',valign:'middle',margin:0,fontFace:'Georgia'});
 
-      // ── DOWNLOAD ──
-      const fname=`BotBonnie_CaseStudy_${formData.brand.replace(/\s/g,'_')}_${Date.now()}.pptx`;
+      const fname=`BotBonnie_CaseStudy_${formData.brand.replace(/\s/g,'_')}.pptx`;
       await pres.writeFile({fileName:fname});
       setExportDone(true);
     }catch(e){
@@ -953,7 +929,7 @@ ${formData.rawMetrics||'無'}
     }finally{setExportLoading(false)}
   };
 
-  const STEPS=['基本資訊','行銷套件','活動描述','活動目標','預覽'];
+    const STEPS=['基本資訊','行銷套件','活動描述','活動目標','預覽'];
 
   return(
     <div className="app">
